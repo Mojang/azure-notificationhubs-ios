@@ -10,7 +10,8 @@ cd "$ABSPATH/WindowsAzureMessaging"
 xcodebuild clean &> /dev/null
 xcodebuild \
     -scheme WindowsAzureMessagingStatic \
-    -destination 'platform=iOS Simulator' \
+    -destination 'platform=iOS Simulator,name=iPhone 8' \
+    -target WindowsAzureMessagingTests \
     test 2>&1 | tee -a "$testLogPath"
 
 grep " TEST SUCCEEDED " "$testLogPath" &> /dev/null
