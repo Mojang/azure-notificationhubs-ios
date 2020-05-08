@@ -7,7 +7,11 @@ testLogPath=$buildFolderPath/CITLog.txt
 echo "******* Build and run CIT *******" 2>&1 | tee -a "$testLogPath"
 cd "$ABSPATH/WindowsAzureMessaging"
 
-xcodebuild -scheme WindowsAzureMessagingStatic -destination 'platform=iOS Simulator,name=iPhone 8' test 2>&1 | tee -a "$testLogPath"
+xcodebuild clean &> /dev/null
+xcodebuild \
+    -scheme WindowsAzureMessagingStatic \
+    -destination 'platform=iOS Simulator' \
+    test 2>&1 | tee -a "$testLogPath"
 
 grep " TEST SUCCEEDED " "$testLogPath" &> /dev/null
 if [ "$?" != "0" ]; then
